@@ -51,7 +51,7 @@ An intelligent web application that detects plant diseases using Deep Learning.
 ---
 
 ## 📂 Project Structure
-app.py best_model.h5 requirements.txt
+app.py model.h5 requirements.txt
 ---
 
 ## ▶️ Run Locally
