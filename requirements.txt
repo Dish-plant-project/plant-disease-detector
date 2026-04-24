@@ -3,3 +3,5 @@ numpy==1.24.3
 pillow
 matplotlib
 tensorflow-cpu==2.12.0
+setuptools
+wheel
