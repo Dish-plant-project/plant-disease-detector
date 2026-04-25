@@ -83,7 +83,7 @@ section[data-testid="stSidebar"] h1 {
 """, unsafe_allow_html=True)
 
 # ================= MODEL =================
-model = tf.keras.models.load_model("best_model.h5")
+model = tf.keras.models.load_model("model.h5")
 
 
 
