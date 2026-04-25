@@ -83,7 +83,9 @@ section[data-testid="stSidebar"] h1 {
 """, unsafe_allow_html=True)
 
 # ================= MODEL =================
+
 model = tf.keras.models.load_model("model.h5")
+
 
 
 
@@ -118,72 +120,141 @@ def is_leaf_image(img_array):
     return True
 # ================= DATA =================
 disease_info = {
+
     "Potato Early Blight": {
-        "description": "Fungal disease causing brown circular spots on leaves, reducing crop yield.",
-        "solution": """
-1. Spray fungicides like Mancozeb or Chlorothalonil every 7–10 days  
-2. Remove infected leaves immediately to stop spreading  
-3. Maintain balanced nitrogen fertilizer levels  
-4. Avoid overhead irrigation to reduce moisture on leaves  
-5. Use drip irrigation for better control  
+        "description": """
+Potato Early Blight is a fungal disease caused by Alternaria solani. 
+It mainly affects older leaves first and spreads rapidly in warm and humid conditions.
+Symptoms include brown circular spots with concentric rings (target-like pattern).
         """,
+
+        "solution": """
+1. Apply fungicides such as Mancozeb or Chlorothalonil every 7–10 days  
+2. Remove and destroy infected leaves immediately  
+3. Maintain proper nitrogen levels in soil  
+4. Avoid overhead irrigation to reduce moisture on leaves  
+5. Use drip irrigation for better water control  
+6. Improve air circulation around plants  
+        """,
+
         "prevention": """
 • Use certified disease-resistant seeds  
+• Practice crop rotation (2–3 years gap)  
+• Avoid planting in previously infected soil  
 • Maintain proper spacing between plants  
-• Ensure good air circulation  
-• Practice crop rotation (2–3 seasons)  
-• Remove plant debris after harvest  
-• Avoid water stagnation in field  
+• Remove plant debris after harvesting  
+• Regular field monitoring for early detection  
+        """,
+
+        "impact": """
+• Reduces photosynthesis  
+• Causes premature leaf drop  
+• Decreases crop yield significantly  
+        """,
+
+        "environment": """
+Favors warm temperature (24–29°C) and high humidity conditions.
         """
     },
 
     "Potato Healthy": {
-        "description": "The plant is healthy with no visible disease symptoms.",
-        "solution": """
-• Continue regular irrigation schedule  
-• Use balanced fertilizers (NPK)  
-• Monitor plant growth regularly  
-• Protect from pests using organic sprays  
+        "description": """
+The plant is healthy and shows no visible signs of disease or infection.
+Leaves are green, fresh, and properly developed.
         """,
+
+        "solution": """
+• Continue proper irrigation schedule  
+• Use balanced fertilizers (NPK ratio)  
+• Maintain soil health with organic compost  
+• Regularly monitor plant condition  
+        """,
+
         "prevention": """
-• Provide sufficient sunlight (6–8 hours daily)  
+• Ensure proper sunlight exposure (6–8 hours daily)  
 • Avoid overwatering  
-• Maintain soil health  
-• Regular inspection of leaves  
+• Protect from pests and insects  
+• Maintain proper soil drainage  
+        """,
+
+        "impact": """
+• Healthy plants produce higher yield  
+• Strong resistance to diseases  
+        """,
+
+        "environment": """
+Optimal growth in moderate temperature with proper sunlight and nutrients.
         """
     },
 
     "Tomato Early Blight": {
-        "description": "Fungal disease causing leaf spots, yellowing, and defoliation.",
-        "solution": """
-• Apply copper-based fungicide regularly  
-• Remove infected leaves  
-• Use organic neem spray  
-• Improve airflow between plants  
+        "description": """
+Tomato Early Blight is a fungal disease caused by Alternaria solani.
+It appears as dark brown spots with concentric rings on older leaves.
+Leaves may turn yellow and drop prematurely.
         """,
+
+        "solution": """
+• Apply copper-based fungicides or chlorothalonil spray weekly  
+• Remove infected leaves immediately  
+• Use neem oil spray as organic treatment  
+• Improve airflow around plants  
+• Avoid watering leaves directly  
+        """,
+
         "prevention": """
-• Avoid wet leaves during watering  
-• Use mulch to prevent soil splash  
-• Maintain proper plant spacing  
-• Rotate crops regularly  
+• Maintain proper spacing between plants  
+• Avoid overhead irrigation  
+• Use mulch to reduce soil splash  
+• Practice crop rotation  
+• Use disease-resistant varieties  
+        """,
+
+        "impact": """
+• Reduces plant growth  
+• Causes leaf damage and fruit loss  
+• Decreases overall yield  
+        """,
+
+        "environment": """
+Thrives in warm, humid environments with poor airflow.
         """
     },
 
     "Tomato Late Blight": {
-        "description": "Highly destructive disease causing rapid plant decay.",
-        "solution": """
-• Remove infected plants immediately  
-• Apply systemic fungicides  
-• Isolate infected area  
-• Use protective sprays during humid weather  
+        "description": """
+Tomato Late Blight is a severe disease caused by Phytophthora infestans.
+It spreads rapidly in wet and cool conditions and can destroy entire crops.
+Symptoms include dark, water-soaked lesions on leaves and stems.
         """,
+
+        "solution": """
+• Apply systemic fungicides such as Metalaxyl or Mancozeb  
+• Remove infected plants immediately  
+• Destroy infected plant material properly  
+• Avoid working in wet fields  
+• Monitor crops regularly  
+        """,
+
         "prevention": """
-• Control humidity levels  
-• Avoid overcrowding  
+• Ensure proper drainage in field  
+• Avoid water accumulation  
+• Maintain plant spacing  
 • Use certified seeds  
-• Monitor weather conditions regularly  
+• Monitor weather conditions  
+        """,
+
+        "impact": """
+• Rapid crop destruction  
+• Major yield loss  
+• Can spread to entire field quickly  
+        """,
+
+        "environment": """
+Favors cool (10–20°C) and wet conditions with high humidity.
         """
     }
+
 }
 
 
@@ -269,8 +340,9 @@ elif page == "🔍 Detection":
         # ===== IMAGE LOAD =====
         image = Image.open(uploaded_file).convert("RGB")
 
-        col1, col2 = st.columns([1,1])
-
+        # --- FIX 1: Container ka use (Ye layout ko hilne nahi dega) ---
+       
+        col1, col2 = st.columns([1, 1])
       
         with col1:
             st.image(image, use_container_width=True)
@@ -303,8 +375,7 @@ elif page == "🔍 Detection":
         # ===== CONFIDENCE FIX =====
         if confidence > 0.98:
             confidence = 0.92
-
-        # ===== RESULT =====
+  # ===== RESULT =====
         with col2:
           st.success(f"Prediction: {result}")
           st.info(f"Confidence: {confidence*100:.2f}%")
@@ -324,9 +395,7 @@ elif page == "🔍 Detection":
 
         st.subheader("Prevention")
         st.warning(info["prevention"])
-           
-
-
+    
 # ================= ABOUT =================
 elif page == "📊 About":
 
@@ -345,7 +414,8 @@ elif page == "📊 About":
     <h3>🌿 AI Plant Disease Detector</h3>
     <p>
     This project is an <b>AI-powered plant disease detection system</b> that uses 
-    <b>Deep Learning (CNN model)</b> to analyze plant leaf images and detect diseases instantly.
+    <b>Deep Learning (CNN model)</b> to analyze plant
+    leaf images and detect diseases instantly.
     </p>
     <p>The system provides:</p>
     <ul>
