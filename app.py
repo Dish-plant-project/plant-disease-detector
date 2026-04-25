@@ -84,7 +84,7 @@ section[data-testid="stSidebar"] h1 {
 
 # ================= MODEL =================
 
-model = tf.keras.models.load_model("model.h5")
+model = tf.keras.models.load_model("model.h5",compile=False)
 
 
 
